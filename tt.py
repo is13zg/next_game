@@ -1,5 +1,7 @@
 import collections
-
+import networkx as nx
+import numpy.random as rnd
+import matplotlib.pyplot as plt
 
 def dfs(graph, start, visited=None):
     if visited is None:
@@ -35,7 +37,11 @@ dfs(graph, '0')
 
 graph = nx.DiGraph()
 
-
+gr = {'0': set(['1', '2']),
+         '1': set(['0', '3', '4']),
+         '2': set(['0']),
+         '3': set(['1']),
+         '4': set(['2', '3'])}
 
 
 for x in gr.keys():
