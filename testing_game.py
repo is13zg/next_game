@@ -163,6 +163,8 @@ def get_max_path(data):
     draw_graph(gr2)
 
 
+print(card_by_num(77))
+print(77)
 t_ls = main_ls[:]
 random.shuffle(t_ls)
 tec_razdacha = t_ls[:random.randint(5, 8)]
@@ -171,7 +173,7 @@ tec_razdacha = list(map(num_by_card, tec_razdacha))
 get_max_path(tec_razdacha)
 
 exit()
-# данный код решает cxbnftn genb какой длины можно построить в данной раскладке из 9 карт
+# данный код решает считает путь какой длины можно построить в данной раскладке из 9 карт
 gr_ex = {0: {4, 5, 7}, 1: {3}, 2: {0, 3, 4, 6, 7, 8}, 3: {2, 4, 5, 6, 7}, 4: {0, 1, 2, 6}, 5: {1, 2, 3, 6, 7},
          6: {0, 7}, 7: {8, 1, 6}, 8: {1, 2, 3, 4, 5, 7}}
 tec_razdacha = [(2, 4, 2, 3), (2, 0, 6, 0), (6, 4, 1, 2), (7, 0, 0, 3), (7, 3, 4, 4), (5, 6, 6, 4), (7, 6, 1, 0),
