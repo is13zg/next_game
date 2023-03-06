@@ -4,34 +4,22 @@ import itertools
 import networkx as nx
 import numpy.random as rnd
 import matplotlib.pyplot as plt
+from PIL import Image
+from PIL import ImageDraw, ImageFont
 
-main_ls = [(0, 0, 0, 0), (1, 1, 1, 1), (2, 2, 2, 2), (3, 3, 3, 3), (4, 4, 4, 4), (5, 5, 5, 5), (6, 6, 6, 0),
-           (7, 7, 0, 1), (0, 8, 1, 2), (1, 0, 2, 3), (2, 1, 3, 4), (3, 2, 4, 5), (4, 3, 5, 0), (5, 4, 6, 1),
-           (6, 5, 0, 2), (7, 6, 1, 3), (0, 7, 2, 4), (1, 8, 3, 5), (2, 0, 4, 0), (3, 1, 5, 1), (4, 2, 6, 2),
-           (5, 3, 0, 3), (6, 4, 1, 4), (7, 5, 2, 5), (0, 6, 3, 0), (1, 7, 4, 1), (2, 8, 5, 2), (3, 0, 6, 3),
-           (4, 1, 0, 4), (5, 2, 1, 5), (6, 3, 2, 0), (7, 4, 3, 1), (0, 5, 4, 2), (1, 6, 5, 3), (2, 7, 6, 4),
-           (3, 8, 0, 5), (4, 0, 1, 0), (5, 1, 2, 1), (6, 2, 3, 2), (7, 3, 4, 3), (0, 4, 5, 4), (1, 5, 6, 5),
-           (2, 6, 0, 0), (3, 7, 1, 1), (4, 8, 2, 2), (5, 0, 3, 3), (6, 1, 4, 4), (7, 2, 5, 5), (0, 3, 6, 0),
-           (1, 4, 0, 1), (2, 5, 1, 2), (3, 6, 2, 3), (4, 7, 3, 4), (5, 8, 4, 5), (6, 0, 5, 0), (7, 1, 6, 1),
-           (0, 2, 0, 2), (1, 3, 1, 3), (2, 4, 2, 4), (3, 5, 3, 5), (4, 6, 4, 0), (5, 7, 5, 1), (6, 8, 6, 2),
-           (7, 0, 0, 3), (0, 1, 1, 4), (1, 2, 2, 5), (2, 3, 3, 0), (3, 4, 4, 1), (4, 5, 5, 2), (5, 6, 6, 3),
-           (6, 7, 0, 4), (7, 8, 1, 5), (0, 0, 2, 0), (1, 1, 3, 1), (2, 2, 4, 2), (3, 3, 5, 3), (4, 4, 6, 4),
-           (5, 5, 0, 5), (6, 6, 1, 0), (7, 7, 2, 1), (0, 8, 3, 2), (1, 0, 4, 3), (2, 1, 5, 4), (3, 2, 6, 5),
-           (4, 3, 0, 0), (5, 4, 1, 1), (6, 5, 2, 2), (7, 6, 3, 3), (0, 7, 4, 4), (1, 8, 5, 5), (2, 0, 6, 0),
-           (3, 1, 0, 1), (4, 2, 1, 2), (5, 3, 2, 3), (6, 4, 3, 4), (7, 5, 4, 5), (0, 6, 5, 0), (1, 7, 6, 1),
-           (2, 8, 0, 2), (3, 0, 1, 3)]
-main_ls = [(0, 0, 0, 0), (1, 1, 1, 1), (2, 2, 2, 2), (3, 3, 3, 3), (4, 4, 4, 4), (5, 5, 5, 5), (6, 6, 6, 0),
-           (7, 7, 0, 1), (0, 8, 1, 2), (1, 0, 2, 3), (2, 1, 3, 4), (3, 2, 4, 5), (4, 3, 5, 0), (5, 4, 6, 1),
-           (6, 5, 0, 2), (7, 6, 1, 3), (0, 7, 2, 4), (1, 8, 3, 5), (2, 0, 4, 0), (3, 1, 5, 1), (4, 2, 6, 2),
-           (5, 3, 0, 3), (6, 4, 1, 4), (7, 5, 2, 5), (0, 6, 3, 0), (1, 7, 4, 1), (2, 8, 5, 2), (3, 0, 6, 3),
-           (4, 1, 0, 4), (5, 2, 1, 5), (6, 3, 2, 0), (7, 4, 3, 1), (0, 5, 4, 2), (1, 6, 5, 3), (2, 7, 6, 4),
-           (3, 8, 0, 5), (4, 0, 1, 0), (5, 1, 2, 1), (6, 2, 3, 2), (7, 3, 4, 3), (0, 4, 5, 4), (1, 5, 6, 5),
-           (2, 6, 0, 0), (3, 7, 1, 1), (4, 8, 2, 2), (5, 0, 3, 3), (6, 1, 4, 4), (7, 2, 5, 5), (0, 3, 6, 0),
-           (1, 4, 0, 1), (2, 5, 1, 2), (3, 6, 2, 3), (4, 7, 3, 4), (5, 8, 4, 5), (6, 0, 5, 0), (7, 1, 6, 1),
-           (0, 2, 0, 2), (1, 3, 1, 3), (2, 4, 2, 4), (3, 5, 3, 5), (4, 6, 4, 0), (5, 7, 5, 1), (6, 8, 6, 2),
-           (7, 0, 0, 3), (0, 1, 1, 4), (1, 2, 2, 5), (2, 3, 3, 0), (3, 4, 4, 1), (4, 5, 5, 2), (5, 6, 6, 3),
-           (6, 7, 0, 4), (7, 8, 1, 5), (0, 0, 2, 0), (1, 1, 3, 1), (2, 2, 4, 2), (3, 3, 5, 3), (4, 4, 6, 4),
-           (5, 5, 0, 5), (6, 6, 1, 0), (7, 7, 2, 1), (0, 8, 3, 2)]
+# (a,b,c,d)
+# какая фигура 0 уголник, 1 угольник и тд макс 7 уугольник 0..7 mod 8
+# (0,1,2,3,4,5,6,7) - 8 шт
+# кол-во фигур на карточке от 1 до 9  0..8  mod 9
+# (1,2,3,4,5,6,7,8,9)- 9 шт
+# цвет фигур от красного до фиолетового КОЖЗГСФ  0..6 mod 7
+# (кр, ор, жлт, зел, глб, син, фил )- 7 шт
+# тип закраски нет закраски, верт полосы, верт+гор, верт +гор+ 2 диагонали, полная закраска 0..5 mod 6
+# ([нет], [верт], [верт + диаг], [верт + диаг + гор], [верт + диаг + гор + диаг2 ], [полн заливка]) - 6 шт
+
+import cards_list
+
+main_ls = cards_list.main_ls
 
 tec_razdacha = []
 
@@ -67,6 +55,18 @@ def is_a_then_b(aa, bb):
         return True
     if (aa[3] + 1) % 6 == bb[3]:
         return True
+    return False
+
+
+def get_kind_then(aa, bb):
+    if (aa[0] + 1) % 8 == bb[0]:
+        return "форма"
+    if (aa[1] + 1) % 9 == bb[1]:
+        return "кол-во"
+    if (aa[2] + 1) % 7 == bb[2]:
+        return "цвет"
+    if (aa[3] + 1) % 6 == bb[3]:
+        return "закраска"
     return False
 
 
@@ -133,7 +133,6 @@ def find_all_nodes_path(gr):
 
 
 def get_max_path(data):
-    print(data)
     if type(data) == str:
         if "_" in data:
             data = list(map(int, data.split("_")))
@@ -145,13 +144,20 @@ def get_max_path(data):
     res = dict()
     for i, x in enumerate(data):
         res[i] = get_ls_of_prop_next_elem(x, data)
-    print(res)
     # draw_graph(res)
     answer = find_all_nodes_path(res)
-    # print(answer)
+    print(answer)
     cards_number = list(map(num_by_card, data))
     path_answer = [cards_number[i] for i in answer[1]]
-    print(path_answer)
+    print(f"path: {path_answer}")
+
+    print(f"[{path_answer[0]}]", end=" ")
+    for x in range(len(path_answer))[1:]:
+        # print(x)
+        print(get_kind_then(data[answer[1][x - 1]], data[answer[1][x]]), end=" ")
+        print(f"[{path_answer[x]}]", end=" ")
+    print()
+    draw_ans([data[i] for i in answer[1]])
 
     gr2 = dict()
     for key in res.keys():
@@ -163,76 +169,102 @@ def get_max_path(data):
     draw_graph(gr2)
 
 
-print(card_by_num(77))
-print(77)
+def test(N=1000, vikladka=9):
+    print(f"start test N={N} Size={vikladka}")
+    SIZE = vikladka
+    count = 0
+    ok = 0
+    res_dict = dict()
+    while count < N:
+        # print(f"count={count}")
+        t_ls = main_ls[:]
+        random.shuffle(t_ls)
+        tec_razdacha = t_ls[:SIZE]
+        res = dict()
+        for i, x in enumerate(tec_razdacha):
+            res[i] = get_ls_of_prop_next_elem(x, tec_razdacha)
+        # print("graphs:", res)
+
+        answer = find_all_nodes_path(res)
+        res_dict[answer[2]] = res_dict.get(answer[2], 0) + 1
+        # find_all_nodes_path2(res)
+        ok += answer[0]
+        # print(answer[1])
+
+        count += 1
+    print(ok, count)
+    print(ok * 100 / count)
+    print(res_dict)
+
+
+def draw_ans(answer):
+    if len(answer)>9:
+        print("too long")
+        return
+    t_ls = answer
+    while len(t_ls) < 9:
+        t_ls.append((0, 0, 0, 0))
+
+    mim = Image.new('RGBA', (1297 * 3, 1836 * 3), "white")
+
+    pim = Image.open(f"res\{t_ls[0][0]}_{t_ls[0][1]}_{t_ls[0][2]}_{t_ls[0][3]}.png")
+    mim.paste(pim, (1297 * 0, 1836 * 0), pim)
+
+    pim = Image.open(f"res\{t_ls[1][0]}_{t_ls[1][1]}_{t_ls[1][2]}_{t_ls[1][3]}.png")
+    mim.paste(pim, (1297 * 1, 1836 * 0), pim)
+
+    pim = Image.open(f"res\{t_ls[2][0]}_{t_ls[2][1]}_{t_ls[2][2]}_{t_ls[2][3]}.png")
+    mim.paste(pim, (1297 * 2, 1836 * 0), pim)
+
+    pim = Image.open(f"res\{t_ls[3][0]}_{t_ls[3][1]}_{t_ls[3][2]}_{t_ls[3][3]}.png")
+    mim.paste(pim, (1297 * 0, 1836 * 1), pim)
+
+    pim = Image.open(f"res\{t_ls[4][0]}_{t_ls[4][1]}_{t_ls[4][2]}_{t_ls[4][3]}.png")
+    mim.paste(pim, (1297 * 1, 1836 * 1), pim)
+
+    pim = Image.open(f"res\{t_ls[5][0]}_{t_ls[5][1]}_{t_ls[5][2]}_{t_ls[5][3]}.png")
+    mim.paste(pim, (1297 * 2, 1836 * 1), pim)
+
+    pim = Image.open(f"res\{t_ls[6][0]}_{t_ls[6][1]}_{t_ls[6][2]}_{t_ls[6][3]}.png")
+    mim.paste(pim, (1297 * 0, 1836 * 2), pim)
+
+    pim = Image.open(f"res\{t_ls[7][0]}_{t_ls[7][1]}_{t_ls[7][2]}_{t_ls[7][3]}.png")
+    mim.paste(pim, (1297 * 1, 1836 * 2), pim)
+
+    pim = Image.open(f"res\{t_ls[8][0]}_{t_ls[8][1]}_{t_ls[8][2]}_{t_ls[8][3]}.png")
+    mim.paste(pim, (1297 * 2, 1836 * 2), pim)
+
+    draw = ImageDraw.Draw(mim)
+    draw.line((1297 * 1, 1836 * 0, 1297 * 1, 1836 * 3), fill="black", width=8)
+    draw.line((1297 * 2, 1836 * 0, 1297 * 2, 1836 * 3), fill="black", width=8)
+    draw.line((1297 * 0, 1836 * 1, 1297 * 3, 1836 * 1), fill="black", width=8)
+    draw.line((1297 * 0, 1836 * 2, 1297 * 3, 1836 * 2), fill="black", width=8)
+
+    bg = Image.new("RGB", mim.size, (255, 255, 255))
+    bg.paste(mim, mask=mim.split()[3])
+    bg.show()
+    # bg.save(f"res2\{i}.jpg", quality=100, subsampling=0)
+
+
+# запуск теста с тек картами, карты в файле card_list.py
+# test()
+
+
+# данный код показывает какискать путь для нужного набора
 t_ls = main_ls[:]
 random.shuffle(t_ls)
-tec_razdacha = t_ls[:random.randint(5, 8)]
+tec_razdacha = t_ls[:8]
 print(len(tec_razdacha), tec_razdacha)
 tec_razdacha = list(map(num_by_card, tec_razdacha))
+print(f"tec_razdacha {tec_razdacha}")
+# get_max_path([60, 12, 6, 16, 35, 68, 63])
+# get_max_path("1 2 10 12")
 get_max_path(tec_razdacha)
 
 exit()
+
 # данный код решает считает путь какой длины можно построить в данной раскладке из 9 карт
 gr_ex = {0: {4, 5, 7}, 1: {3}, 2: {0, 3, 4, 6, 7, 8}, 3: {2, 4, 5, 6, 7}, 4: {0, 1, 2, 6}, 5: {1, 2, 3, 6, 7},
          6: {0, 7}, 7: {8, 1, 6}, 8: {1, 2, 3, 4, 5, 7}}
 tec_razdacha = [(2, 4, 2, 3), (2, 0, 6, 0), (6, 4, 1, 2), (7, 0, 0, 3), (7, 3, 4, 4), (5, 6, 6, 4), (7, 6, 1, 0),
                 (7, 7, 2, 4), (5, 8, 4, 3)]
-
-SIZE = 9
-count = 0
-ok = 0
-res_dict = dict()
-while count < 10000:
-    # print(f"count={count}")
-    t_ls = main_ls[:]
-    random.shuffle(t_ls)
-    tec_razdacha = t_ls[:SIZE]
-    res = dict()
-    for i, x in enumerate(tec_razdacha):
-        res[i] = get_ls_of_prop_next_elem(x, tec_razdacha)
-    # print("graphs:", res)
-
-    answer = find_all_nodes_path(res)
-    res_dict[answer[2]] = res_dict.get(answer[2], 0) + 1
-    # find_all_nodes_path2(res)
-    ok += answer[0]
-    # print(answer[1])
-
-    count += 1
-print(ok, count)
-print(ok * 100 / count)
-print(res_dict)
-
-exit()
-
-# данный код решает задачу в каком слуае у нас есть полный путь из 9 кард
-gr_ex = {0: {4, 5, 7}, 1: {3}, 2: {0, 3, 4, 6, 7, 8}, 3: {2, 4, 5, 6, 7}, 4: {0, 1, 2, 6}, 5: {1, 2, 3, 6, 7},
-         6: {0, 7}, 7: {8, 1, 6}, 8: {1, 2, 3, 4, 5, 7}}
-tec_razdacha = [(2, 4, 2, 3), (2, 0, 6, 0), (6, 4, 1, 2), (7, 0, 0, 3), (7, 3, 4, 4), (5, 6, 6, 4), (7, 6, 1, 0),
-                (7, 7, 2, 4), (5, 8, 4, 3)]
-
-SIZE = 9
-count = 0
-ok = 0
-while count < 10:
-    print(f"count={count}")
-    t_ls = main_ls[:]
-    random.shuffle(t_ls)
-    tec_razdacha = t_ls[:SIZE]
-    res = dict()
-    for i, x in enumerate(tec_razdacha):
-        res[i] = get_ls_of_prop_next_elem(x, tec_razdacha)
-    print("graphs:", res)
-
-    answer = find_all_nodes_path(res)
-    print("path:", answer)
-    # find_all_nodes_path2(res)
-    ok += answer[0]
-    # print(answer[1])
-
-    count += 1
-print(ok, count)
-print(ok * 100 / count)
-
-exit()
