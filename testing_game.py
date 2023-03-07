@@ -6,6 +6,7 @@ import numpy.random as rnd
 import matplotlib.pyplot as plt
 from PIL import Image
 from PIL import ImageDraw, ImageFont
+from statistics import mode, median
 
 # (a,b,c,d)
 # какая фигура 0 уголник, 1 угольник и тд макс 7 уугольник 0..7 mod 8
@@ -68,6 +69,18 @@ def get_kind_then(aa, bb):
     if (aa[3] + 1) % 6 == bb[3]:
         return "закраска"
     return False
+
+def get_count_then(aa, bb):
+    c = 0
+    if (aa[0] + 1) % 8 == bb[0]:
+        c += 1
+    if (aa[1] + 1) % 9 == bb[1]:
+        c += 1
+    if (aa[2] + 1) % 7 == bb[2]:
+        c += 1
+    if (aa[3] + 1) % 6 == bb[3]:
+        c += 1
+    return c
 
 
 def get_ls_of_prop_next_elem(elem, ls):
@@ -248,8 +261,34 @@ def draw_ans(answer):
 
 # запуск теста с тек картами, карты в файле card_list.py
 # test()
+main_ls = cards_list.main_lsr
+res = dict()
+for x in range(len(main_ls) -1):
+    res[x] = get_count_then(main_ls[x], main_ls[x+1])
+print(res)
+print(max(res.values()))
+print(min(res.values()))
+print(median(res.values()))
+print(mode(res.values()))
+exit()
 
 
+# подсчет кол-ва следующих элементов, моды , медианы
+main_ls = cards_list.main_ls
+print(len(main_ls))
+res = dict()
+res2= dict()
+for i, x in enumerate(main_ls):
+    res[i] = get_ls_of_prop_next_elem(x, main_ls)
+for x in res.keys():
+    res2[x]=len(res[x])
+print(res2)
+print(max(res2.values()))
+print(min(res2.values()))
+print(median(res2.values()))
+print(mode(res2.values()))
+
+exit(0)
 # данный код показывает какискать путь для нужного набора
 t_ls = main_ls[:]
 random.shuffle(t_ls)
@@ -263,8 +302,7 @@ get_max_path(tec_razdacha)
 
 exit()
 
-# данный код решает считает путь какой длины можно построить в данной раскладке из 9 карт
+# приер графа
 gr_ex = {0: {4, 5, 7}, 1: {3}, 2: {0, 3, 4, 6, 7, 8}, 3: {2, 4, 5, 6, 7}, 4: {0, 1, 2, 6}, 5: {1, 2, 3, 6, 7},
          6: {0, 7}, 7: {8, 1, 6}, 8: {1, 2, 3, 4, 5, 7}}
-tec_razdacha = [(2, 4, 2, 3), (2, 0, 6, 0), (6, 4, 1, 2), (7, 0, 0, 3), (7, 3, 4, 4), (5, 6, 6, 4), (7, 6, 1, 0),
-                (7, 7, 2, 4), (5, 8, 4, 3)]
+

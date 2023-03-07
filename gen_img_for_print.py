@@ -79,5 +79,5 @@ for i in range(page_cards_count):
     bg.save(f"res2\{i}.jpg", quality=100, subsampling=0)
 
 f_im = Image.open("res2/0.jpg")
-to_pdf_ls = to_pdf_ls[1:]
-f_im.save("res2\main.pdf", "PDF", resolution=100.0, save_all=True, append_images=to_pdf_ls)
+to_pdf_ls = to_pdf_ls[1:2]
+f_im.save("res2\page1_2.pdf", "PDF", resolution=100.0, save_all=True, append_images=to_pdf_ls)
