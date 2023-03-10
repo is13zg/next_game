@@ -1,6 +1,6 @@
 from PIL import Image
 from PIL import ImageDraw, ImageFont
-
+import cards_list
 
 def draw_9(name):
     mim = Image.new('RGBA', (1297, 1836), "white")
@@ -126,7 +126,7 @@ def draw_1(name):
 
 
 def draw_all(a,b,c,d,count):
-    fname = f"{a}_1_{c}_{d}.png"
+    fname = f"figures\{a}_1_{c}_{d}.png"
     dict ={0:draw_1,
            1:draw_2,
            2:draw_3,
@@ -153,8 +153,8 @@ def draw_all(a,b,c,d,count):
     res.save(f"res\{a}_{b}_{c}_{d}.png", quality=100, subsampling=0)
 
 
-import cards_list
-main_ls = cards_list.main_ls
+
+
 
 
 #(a,b,c,d)
@@ -169,8 +169,9 @@ main_ls = cards_list.main_ls
 # b = (b + 1) % 9
 # c = (c + 1) % 7
 # d = (d + 1) % 6
-
-count=0
-for x in main_ls:
-    draw_all(x[0],x[1],x[2],x[3],count+1)
-    count+=1
+def mf():
+    main_ls = cards_list.main_ls
+    count=0
+    for x in main_ls:
+        draw_all(x[0],x[1],x[2],x[3],count+1)
+        count+=1
