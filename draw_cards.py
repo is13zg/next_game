@@ -5,7 +5,7 @@ from PIL import ImageDraw
 
 
 def gen_all_fill(z, x, clr):
-    clrs = ["#ff0000", "#ff6600", "#ffff00", "#00cc00", "#00ffff", "#0000ff", "#330066"];
+    clrs = ["#ff3333", "#cc3300", "#cccc00", "#00cc00", "#00ffff", "#0000ff", "#330066"];
 
     im_c = f"{z}_c.jpg";
     im_f = f"{z}_f.jpg";
@@ -80,6 +80,7 @@ def mf():
         for clr in range(7):
             for z in range(8):
                 gen_all_fill( z, x, clr)
+
 
 # t_m=Image.composite(im1,mask_h_l,mask_f)
 # t_m.show()
