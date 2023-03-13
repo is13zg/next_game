@@ -259,6 +259,19 @@ def draw_ans(answer):
     # bg.save(f"res2\{i}.jpg", quality=100, subsampling=0)
 
 
+# данный код показывает какискать путь для нужного набора
+# t_ls = main_ls[:]
+# random.shuffle(t_ls)
+# tec_razdacha = t_ls[:8]
+# print(len(tec_razdacha), tec_razdacha)
+# tec_razdacha = list(map(num_by_card, tec_razdacha))
+# print(f"tec_razdacha {tec_razdacha}")
+# get_max_path([60, 12, 6, 16, 35, 68, 63])
+get_max_path("38 18 2 75 81 66 65 46 50")
+# get_max_path(tec_razdacha)
+
+exit()
+
 # запуск теста с тек картами, карты в файле card_list.py
 # test()
 main_ls = cards_list.main_lsr
@@ -289,18 +302,7 @@ print(median(res2.values()))
 print(mode(res2.values()))
 
 exit(0)
-# данный код показывает какискать путь для нужного набора
-t_ls = main_ls[:]
-random.shuffle(t_ls)
-tec_razdacha = t_ls[:8]
-print(len(tec_razdacha), tec_razdacha)
-tec_razdacha = list(map(num_by_card, tec_razdacha))
-print(f"tec_razdacha {tec_razdacha}")
-# get_max_path([60, 12, 6, 16, 35, 68, 63])
-# get_max_path("1 2 10 12")
-get_max_path(tec_razdacha)
 
-exit()
 
 # приер графа
 gr_ex = {0: {4, 5, 7}, 1: {3}, 2: {0, 3, 4, 6, 7, 8}, 3: {2, 4, 5, 6, 7}, 4: {0, 1, 2, 6}, 5: {1, 2, 3, 6, 7},

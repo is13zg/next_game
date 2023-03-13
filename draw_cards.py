@@ -5,11 +5,15 @@ from PIL import ImageDraw
 
 
 def gen_all_fill(z, x, clr):
-    clrs = ["#ff3333", "#cc3300", "#cccc00", "#00cc00", "#00ffff", "#0000ff", "#330066"];
+    clrs = ["#ff0000", "#cc3300", "#ffde00", "#00cc00", "#00ffff", "#0000ff", "#330066"];
 
     im_c = f"{z}_c.jpg";
     im_f = f"{z}_f.jpg";
     f_m = f"s{x}.jpg";
+
+    # im_c = f"{z}_c.png";
+    # im_f = f"{z}_f.png";
+    # f_m = f"s{x}.png";
     color = clrs[clr]
 
     mask_c = Image.open(im_c)
