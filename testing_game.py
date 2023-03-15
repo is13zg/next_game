@@ -256,6 +256,7 @@ def draw_ans(answer):
     bg = Image.new("RGB", mim.size, (255, 255, 255))
     bg.paste(mim, mask=mim.split()[3])
     bg.show()
+    bg.save("answer.jpg")
     # bg.save(f"res2\{i}.jpg", quality=100, subsampling=0)
 
 
@@ -267,7 +268,7 @@ def draw_ans(answer):
 # tec_razdacha = list(map(num_by_card, tec_razdacha))
 # print(f"tec_razdacha {tec_razdacha}")
 # get_max_path([60, 12, 6, 16, 35, 68, 63])
-get_max_path("38 18 2 75 81 66 65 46 50")
+get_max_path("40 4 68 51")
 # get_max_path(tec_razdacha)
 
 exit()
