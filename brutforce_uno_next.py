@@ -10,14 +10,16 @@ def have_card(tec, mycards):
 
 
 def is_a_then_b(aa, bb):
-    x = random.randint(0, 3)
-    if (aa[0] + 1) % 8 == bb[0] and x != 0:
+    x = [0, 1, 2, 3]
+    random.shuffle(x)
+    x = x[:2]
+    if (aa[0] + 1) % 8 == bb[0] and 0 not in x:
         return True
-    if (aa[1] + 1) % 9 == bb[1] and x != 1:
+    if (aa[1] + 1) % 9 == bb[1] and 1 not in x:
         return True
-    if (aa[2] + 1) % 7 == bb[2] and x != 2:
+    if (aa[2] + 1) % 7 == bb[2] and 2 not in x:
         return True
-    if (aa[3] + 1) % 6 == bb[3] and x != 3:
+    if (aa[3] + 1) % 6 == bb[3] and 3 not in x:
         return True
     return False
 
