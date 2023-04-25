@@ -8,8 +8,18 @@ def have_card(tec, mycards):
             return x
     return None
 
-
 def is_a_then_b(aa, bb):
+    if aa[0] == bb[0]:
+        return True
+    if aa[1] == bb[1]:
+        return True
+    if aa[1] == bb[1]:
+        return True
+    if aa[1] == bb[1]:
+        return True
+    return False
+
+def is_a_then_b_old(aa, bb):
     x = [0, 1, 2, 3]
     random.shuffle(x)
     x = x[:2]

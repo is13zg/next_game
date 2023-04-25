@@ -47,7 +47,33 @@ def num_by_card(card):
     return main_ls.index(card) + 1
 
 
+def is_a_then_b_new(aa, bb):
+    if aa[0] == bb[0]:
+        return True
+    if aa[1] == bb[1]:
+        return True
+    if aa[1] == bb[1]:
+        return True
+    if aa[1] == bb[1]:
+        return True
+    return False
+
+
 def is_a_then_b(aa, bb):
+    x = [0, 1, 2, 3]
+    random.shuffle(x)
+    x = x[:1]
+    if (aa[0] + 1) % 8 == bb[0] and 0 not in x:
+        return True
+    if (aa[1] + 1) % 9 == bb[1] and 1 not in x:
+        return True
+    if (aa[2] + 1) % 7 == bb[2] and 2 not in x:
+        return True
+    if (aa[3] + 1) % 6 == bb[3] and 3 not in x:
+        return True
+    return False
+
+def is_a_then_b_main(aa, bb):
     if (aa[0] + 1) % 8 == bb[0]:
         return True
     if (aa[1] + 1) % 9 == bb[1]:
@@ -69,6 +95,7 @@ def get_kind_then(aa, bb):
     if (aa[3] + 1) % 6 == bb[3]:
         return "закраска"
     return False
+
 
 def get_count_then(aa, bb):
     c = 0
@@ -182,7 +209,7 @@ def get_max_path(data):
     draw_graph(gr2)
 
 
-def test(N=1000, vikladka=9):
+def test(N=1000, vikladka=7):
     print(f"start test N={N} Size={vikladka}")
     SIZE = vikladka
     count = 0
@@ -211,7 +238,7 @@ def test(N=1000, vikladka=9):
 
 
 def draw_ans(answer):
-    if len(answer)>9:
+    if len(answer) > 9:
         print("too long")
         return
     t_ls = answer
@@ -260,42 +287,42 @@ def draw_ans(answer):
     # bg.save(f"res2\{i}.jpg", quality=100, subsampling=0)
 
 
-# данный код показывает какискать путь для нужного набора
-# t_ls = main_ls[:]
-# random.shuffle(t_ls)
-# tec_razdacha = t_ls[:8]
-# print(len(tec_razdacha), tec_razdacha)
-# tec_razdacha = list(map(num_by_card, tec_razdacha))
-# print(f"tec_razdacha {tec_razdacha}")
-# get_max_path([60, 12, 6, 16, 35, 68, 63])
-get_max_path("40 4 68 51")
-# get_max_path(tec_razdacha)
-
-exit()
+# # данный код показывает какискать путь для нужного набора
+# # t_ls = main_ls[:]
+# # random.shuffle(t_ls)
+# # tec_razdacha = t_ls[:8]
+# # print(len(tec_razdacha), tec_razdacha)
+# # tec_razdacha = list(map(num_by_card, tec_razdacha))
+# # print(f"tec_razdacha {tec_razdacha}")
+# # get_max_path([60, 12, 6, 16, 35, 68, 63])
+# get_max_path("40 4 68 51")
+# # get_max_path(tec_razdacha)
+#
+# exit()
 
 # запуск теста с тек картами, карты в файле card_list.py
-# test()
-main_ls = cards_list.main_lsr
-res = dict()
-for x in range(len(main_ls) -1):
-    res[x] = get_count_then(main_ls[x], main_ls[x+1])
-print(res)
-print(max(res.values()))
-print(min(res.values()))
-print(median(res.values()))
-print(mode(res.values()))
-exit()
+test(10000)
+# main_ls = cards_list.main_lsr
+# res = dict()
+# for x in range(len(main_ls) -1):
+#     res[x] = get_count_then(main_ls[x], main_ls[x+1])
+# print(res)
+# print(max(res.values()))
+# print(min(res.values()))
+# print(median(res.values()))
+# print(mode(res.values()))
+# exit()
 
 
 # подсчет кол-ва следующих элементов, моды , медианы
 main_ls = cards_list.main_ls
 print(len(main_ls))
 res = dict()
-res2= dict()
+res2 = dict()
 for i, x in enumerate(main_ls):
     res[i] = get_ls_of_prop_next_elem(x, main_ls)
 for x in res.keys():
-    res2[x]=len(res[x])
+    res2[x] = len(res[x])
 print(res2)
 print(max(res2.values()))
 print(min(res2.values()))
@@ -304,8 +331,6 @@ print(mode(res2.values()))
 
 exit(0)
 
-
 # приер графа
 gr_ex = {0: {4, 5, 7}, 1: {3}, 2: {0, 3, 4, 6, 7, 8}, 3: {2, 4, 5, 6, 7}, 4: {0, 1, 2, 6}, 5: {1, 2, 3, 6, 7},
          6: {0, 7}, 7: {8, 1, 6}, 8: {1, 2, 3, 4, 5, 7}}
-
