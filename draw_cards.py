@@ -5,7 +5,7 @@ from PIL import ImageDraw
 
 
 def gen_all_fill(z, x, clr):
-    clrs = ["#ff0000", "#cc3300", "#ffde00", "#00cc00", "#00ffff", "#0000ff", "#330066"];
+    clrs = ["#cd1719", "#ed7004", "#ffcc08", "#3fa535", "#04e7f5", "#054798", "#60267b"];
 
     im_c = f"{z}_c.jpg";
     im_f = f"{z}_f.jpg";
@@ -16,9 +16,15 @@ def gen_all_fill(z, x, clr):
     # f_m = f"s{x}.png";
     color = clrs[clr]
 
+    if x == 0:
+        im_c = f"{z}_cc.jpg";
+
     mask_c = Image.open(im_c)
     mask_f = Image.open(im_f).convert('L')
     all_black = Image.new('RGB', (500, 500), (0, 0, 0))
+
+
+
 
     im1 = Image.new('RGB', (500, 500), 'white')
     mask = Image.open(f_m).convert('L')
@@ -33,7 +39,7 @@ def gen_all_fill(z, x, clr):
 
     newData = []
     for item in datas:
-        if item[0] == 255 and item[1] == 255 and item[2] == 255:
+        if item[0] > 250 and item[1] > 250 and item[2] > 250:
             newData.append((255, 255, 255, 0))
         else:
             newData.append(item)
@@ -112,3 +118,4 @@ def mf():
 #
 # composite_2_im(mask_h,mask_v)
 #
+mf()
