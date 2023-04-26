@@ -63,7 +63,7 @@ def draw_clr_lines2():
     for ramka in range(1, 2):
         # clr lines
         for lines in range(1, 5):
-            for tol in range(5, 9):
+            for tol in range(13, 17):
                 mim = Image.open("pics/fon.png")
 
                 tx = Image.open(f"pics/cline/{tol}/{lines}.png")
@@ -135,7 +135,7 @@ def make_res2():
 
         mim.save(f"pics/res/rflines_tol{tol}.png", quality=100, subsampling=0)
 
-        for tol in range(5, 9):
+        for tol in range(9, 13):
             mim = Image.new('RGBA', (iw * 2, ih * 2), "white")
             for lines in range(1, 5):
                 tx = Image.open(f"pics/res/rmk1_clines{lines}_tol{tol}.png")
@@ -152,9 +152,31 @@ def make_res2():
             mim.save(f"pics/res/cflines_tol{tol}.png", quality=100, subsampling=0)
 
 
+
+def make_res3():
+    ih = 400
+    iw = 500
+
+
+
+    for tol in range(13, 17):
+        mim = Image.new('RGBA', (iw * 2, ih * 2), "white")
+        for lines in range(1, 5):
+            tx = Image.open(f"pics/res/rmk1_clines{lines}_tol{tol}.png")
+
+            if lines == 1:
+                mim.paste(tx, (0, 0))
+            if lines == 2:
+                mim.paste(tx, (iw, 0))
+            if lines == 3:
+                mim.paste(tx, (0, ih))
+            if lines == 4:
+                mim.paste(tx, (iw, ih))
+
+        mim.save(f"pics/res/cflines_tol{tol}.png", quality=100, subsampling=0)
 # draw_clr_lines()
 # draw_fon_lines()
 # make_res()
 # draw_clr_lines2()
 # draw_fon_lines2()
-make_res2()
+make_res3()

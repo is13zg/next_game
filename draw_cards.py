@@ -5,7 +5,7 @@ from PIL import ImageDraw
 
 
 def gen_all_fill(z, x, clr):
-    clrs = ["#cd1719", "#ed7004", "#ffcc08", "#3fa535", "#04e7f5", "#054798", "#60267b"];
+    clrs = ["#cd1719", "#ed7004", "#ffcc08", "#3fa535", "#00a5d1", "#054798", "#60267b"];
 
     im_c = f"{z}_c.jpg";
     im_f = f"{z}_f.jpg";

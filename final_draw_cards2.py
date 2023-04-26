@@ -126,9 +126,10 @@ def draw_2(name):
 def draw_1(name):
     mim = Image.new('RGBA', (ih, iw), "#fffce3")
     pim = Image.open(name)
-    pim = pim.resize((round(pim.width * 2.2),round(pim.height * 2.2)))
-    mim.paste(pim, (50, 350), pim)
+    pim = pim.resize((round(pim.width * 2),round(pim.height * 2)))
+    mim.paste(pim, (100, 400), pim)
     return mim
+
 
 
 
@@ -156,6 +157,7 @@ def draw_all(a, b, c, d, count):
     draw = ImageDraw.Draw(res)
     draw.text((40, 30), "№_" + str(count), font=font, fill='#000')
     draw.text((900, 30), "№_" + str(count), font=font, fill='#000')
+    res.show()
 
     res.save(f"res\{a}_{b}_{c}_{d}.png", quality=100, subsampling=0)
 
@@ -181,3 +183,4 @@ def mf():
 
 
 # mf()
+draw_all(0, 0, 1, 3, 99)
