@@ -4,10 +4,10 @@ import cards_list
 
 ih = 1200
 iw = 1800  # 1836
-
+background_color = "#ffffff"
 
 def draw_9(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     pim = Image.open(name)
 
     pim = pim.resize((round(pim.width * .95), round(pim.height * .95)))
@@ -27,7 +27,7 @@ def draw_9(name):
 
 
 def draw_8(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     pim = Image.open(name)
     mim.paste(pim, (-20, 20), pim)
     mim.paste(pim, (-20, 665), pim)
@@ -43,7 +43,7 @@ def draw_8(name):
 
 
 def draw_7(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     pim = Image.open(name)
 
     mim.paste(pim, (350, 10), pim)
@@ -59,7 +59,7 @@ def draw_7(name):
 
 
 def draw_6(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     pim = Image.open(name)
 
     mim.paste(pim, (55, 150), pim)
@@ -74,7 +74,7 @@ def draw_6(name):
 
 
 def draw_5(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     pim = Image.open(name)
 
     mim.paste(pim, (55, 150), pim)
@@ -88,7 +88,7 @@ def draw_5(name):
 
 
 def draw_4(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     ls = name.split(".")
     ls[0]=ls[0]+"11"
     pim = Image.open(".".join(ls))
@@ -104,7 +104,7 @@ def draw_4(name):
 
 
 def draw_3(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     ls = name.split(".")
     ls[0]=ls[0]+"12"
     pim = Image.open(".".join(ls))
@@ -118,7 +118,7 @@ def draw_3(name):
 
 
 def draw_2(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     ls = name.split(".")
     ls[0]=ls[0]+"15"
     pim = Image.open(".".join(ls))
@@ -130,7 +130,7 @@ def draw_2(name):
 
 
 def draw_1(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     ls = name.split(".")
     ls[0]=ls[0]+"2"
     pim = Image.open(".".join(ls))
@@ -189,5 +189,6 @@ def mf():
         count += 1
 
 
-# mf()
+if __name__ == "__main__":
+    mf()
 # draw_all(0, 0, 1, 3, 99)

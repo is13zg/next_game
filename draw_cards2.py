@@ -1,7 +1,8 @@
 from PIL import Image
 from PIL import ImageDraw
+import os
 
-
+Fat_Border_on_Empty_FIG = False
 def gen_all_fill(z, x, clr):
     clrs = ["#cd1719", "#ed7004", "#ffcc08", "#3fa535", "#00a5d1", "#054798", "#60267b"];
 
@@ -14,15 +15,16 @@ def gen_all_fill(z, x, clr):
     # f_m = f"s{x}.png";
     color = clrs[clr]
 
-    if x == 0:
-        im_c = f"{z}_cc.jpg";
+    if x == 0 and Fat_Border_on_Empty_FIG:
+        if os.path.exists(f"{z}_cc.jpg"):
+            im_c = f"{z}_cc.jpg";
+        else:
+            im_c = f"{z}_c.jpg";
+            print("No file with fat border")
 
     mask_c = Image.open(im_c)
     mask_f = Image.open(im_f).convert('L')
     all_black = Image.new('RGB', (500, 500), (0, 0, 0))
-
-
-
 
     im1 = Image.new('RGB', (500, 500), 'white')
     mask = Image.open(f_m).convert('L')
@@ -45,6 +47,7 @@ def gen_all_fill(z, x, clr):
     img.putdata(newData)
     img.save(f"figures\{z}_1_{clr}_{x}.png", quality=100, subsampling=0)
 
+
 def gen_all_fill11(z, x, clr):
     clrs = ["#cd1719", "#ed7004", "#ffcc08", "#3fa535", "#00a5d1", "#054798", "#60267b"];
     rszk = 1.1
@@ -63,10 +66,8 @@ def gen_all_fill11(z, x, clr):
     mask_c = mask_c.resize((round(mask_c.width * rszk), round(mask_c.height * rszk)))
     mask_f = mask_f.resize((round(mask_f.width * rszk), round(mask_f.height * rszk)))
 
-
     mask_f = mask_f.convert('L')
     all_black = Image.new('RGB', (round(500 * rszk), round(500 * rszk)), (0, 0, 0))
-
 
     im1 = Image.new('RGB', (round(500 * rszk), round(500 * rszk)), 'white')
     mask = Image.open(f_m).convert('L')
@@ -89,6 +90,7 @@ def gen_all_fill11(z, x, clr):
     img.putdata(newData)
     img.save(f"figures\{z}_1_{clr}_{x}11.png", quality=100, subsampling=0)
 
+
 def gen_all_fill12(z, x, clr):
     clrs = ["#cd1719", "#ed7004", "#ffcc08", "#3fa535", "#00a5d1", "#054798", "#60267b"];
     rszk = 1.2
@@ -106,7 +108,6 @@ def gen_all_fill12(z, x, clr):
     mask_f = Image.open(im_f)
     mask_c = mask_c.resize((round(mask_c.width * rszk), round(mask_c.height * rszk)))
     mask_f = mask_f.resize((round(mask_f.width * rszk), round(mask_f.height * rszk)))
-
 
     mask_f = mask_f.convert('L')
     all_black = Image.new('RGB', (round(500 * rszk), round(500 * rszk)), (0, 0, 0))
@@ -132,6 +133,7 @@ def gen_all_fill12(z, x, clr):
     img.putdata(newData)
     img.save(f"figures\{z}_1_{clr}_{x}12.png", quality=100, subsampling=0)
 
+
 def gen_all_fill15(z, x, clr):
     clrs = ["#cd1719", "#ed7004", "#ffcc08", "#3fa535", "#00a5d1", "#054798", "#60267b"];
     rszk = 1.5
@@ -149,7 +151,6 @@ def gen_all_fill15(z, x, clr):
     mask_f = Image.open(im_f)
     mask_c = mask_c.resize((round(mask_c.width * rszk), round(mask_c.height * rszk)))
     mask_f = mask_f.resize((round(mask_f.width * rszk), round(mask_f.height * rszk)))
-
 
     mask_f = mask_f.convert('L')
     all_black = Image.new('RGB', (round(500 * rszk), round(500 * rszk)), (0, 0, 0))
@@ -175,6 +176,7 @@ def gen_all_fill15(z, x, clr):
     img.putdata(newData)
     img.save(f"figures\{z}_1_{clr}_{x}15.png", quality=100, subsampling=0)
 
+
 def gen_all_fill2(z, x, clr):
     clrs = ["#cd1719", "#ed7004", "#ffcc08", "#3fa535", "#00a5d1", "#054798", "#60267b"];
     rszk = 2
@@ -192,7 +194,6 @@ def gen_all_fill2(z, x, clr):
     mask_f = Image.open(im_f)
     mask_c = mask_c.resize((round(mask_c.width * rszk), round(mask_c.height * rszk)))
     mask_f = mask_f.resize((round(mask_f.width * rszk), round(mask_f.height * rszk)))
-
 
     mask_f = mask_f.convert('L')
     all_black = Image.new('RGB', (round(500 * rszk), round(500 * rszk)), (0, 0, 0))
@@ -227,7 +228,17 @@ def gen_all_fill2(z, x, clr):
 #    img.save(f"{x 6}_{z 8}_{clr 7}.png", quality=100, subsampling=0)
 # типзакраски_угольник_цвет
 
+def make_patterns():
+    for i in range(0, 6):
+        for x in [(750, 3), (600, 2), (550, 1), (500, "")]:
+            im = Image.open(f"s{i}4.jpg")
+            im1 = im.crop((0, 0, x[0], x[0]))
+            im1.save(f"s{i}{x[1]}.jpg")
+
+
 def mf():
+    make_patterns()
+    ccc = 0
     for x in range(6):
         for clr in range(7):
             for z in range(8):
@@ -236,6 +247,9 @@ def mf():
                 gen_all_fill12(z, x, clr)
                 gen_all_fill15(z, x, clr)
                 gen_all_fill2(z, x, clr)
+                ccc += 1
+                if ccc % 100 == 0:
+                    print(ccc / 1680 * 100, "%")
 
 
 # t_m=Image.composite(im1,mask_h_l,mask_f)
@@ -264,4 +278,5 @@ def mf():
 #
 # composite_2_im(mask_h,mask_v)
 #
-mf()
+if __name__ == "__main__":
+    mf()

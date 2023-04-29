@@ -80,10 +80,11 @@ def mf():
         bg.paste(mim, mask=mim.split()[3])
 
         to_pdf_ls.append(bg)
-        bg.save(f"res2\{i}.jpg", quality=100, subsampling=0)
+        bg.save(f"res2\{i}.jpg", quality=60, resolution=20.0, subsampling=0)
 
     f_im = Image.open("res2/0.jpg")
     to_pdf_ls = to_pdf_ls[1:]
     f_im.save("res2\mainpdf.pdf", "PDF", resolution=100.0, save_all=True, append_images=to_pdf_ls)
 
-mf()
+if __name__ == "__main__":
+    mf()

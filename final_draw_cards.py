@@ -4,10 +4,11 @@ import cards_list
 
 ih = 1297
 iw = 1925  # 1836
+background_color = "#ffffff"
 
 
 def draw_9(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     pim = Image.open(name)
     mim.paste(pim, (-2, 20), pim)
     mim.paste(pim, (-2, 575), pim)
@@ -24,7 +25,7 @@ def draw_9(name):
 
 
 def draw_8(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     pim = Image.open(name)
     mim.paste(pim, (-20, 25), pim)
     mim.paste(pim, (-20, 665), pim)
@@ -40,7 +41,7 @@ def draw_8(name):
 
 
 def draw_7(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     pim = Image.open(name)
 
     mim.paste(pim, (395, 5), pim)
@@ -56,7 +57,7 @@ def draw_7(name):
 
 
 def draw_6(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     pim = Image.open(name)
 
     mim.paste(pim, (50, 70), pim)
@@ -71,7 +72,7 @@ def draw_6(name):
 
 
 def draw_5(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     pim = Image.open(name)
 
     mim.paste(pim, (55, 150), pim)
@@ -85,7 +86,7 @@ def draw_5(name):
 
 
 def draw_4(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     pim = Image.open(name)
 
     mim.paste(pim, (75, 200), pim)
@@ -98,7 +99,7 @@ def draw_4(name):
 
 
 def draw_3(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     pim = Image.open(name)
 
     mim.paste(pim, (400, 110), pim)
@@ -108,7 +109,7 @@ def draw_3(name):
 
 
 def draw_2(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     pim = Image.open(name)
 
     mim.paste(pim, (400, 310), pim)
@@ -117,7 +118,7 @@ def draw_2(name):
 
 
 def draw_2(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     pim = Image.open(name)
 
     mim.paste(pim, (400, 310), pim)
@@ -126,7 +127,7 @@ def draw_2(name):
 
 
 def draw_1(name):
-    mim = Image.new('RGBA', (ih, iw), "#fffce3")
+    mim = Image.new('RGBA', (ih, iw), background_color)
     pim = Image.open(name)
     mim.paste(pim, (400, 670), pim)
     return mim

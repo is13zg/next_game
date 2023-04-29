@@ -2,7 +2,7 @@ from PIL import Image
 from PIL import ImageDraw
 
 
-
+Fat_Border_on_Empty_FIG = False
 
 def gen_all_fill(z, x, clr):
     clrs = ["#cd1719", "#ed7004", "#ffcc08", "#3fa535", "#00a5d1", "#054798", "#60267b"];
@@ -16,7 +16,7 @@ def gen_all_fill(z, x, clr):
     # f_m = f"s{x}.png";
     color = clrs[clr]
 
-    if x == 0:
+    if x == 0 and Fat_Border_on_Empty_FIG:
         im_c = f"{z}_cc.jpg";
 
     mask_c = Image.open(im_c)
@@ -118,4 +118,5 @@ def mf():
 #
 # composite_2_im(mask_h,mask_v)
 #
-mf()
+if __name__ == "__main__":
+    mf()
